@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Client, UploadedObjectInfo } from 'minio';
+import { Client } from 'minio';
 import { v4 } from 'uuid';
 import { extension } from 'mime-types'
 
@@ -34,7 +34,7 @@ export class S3Service {
     const filename = `${v4()}.${extension(file.mimetype)}`;
     return new Promise((resolve, reject) => this.client.putObject(
       this.bucket, filename, file.buffer, file.size, { 'Content-Type': file.mimetype },
-      (err, info) => {
+      err => {
         if (err) {
           return reject(err)
         }

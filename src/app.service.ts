@@ -5,6 +5,7 @@ import { S3Service } from './s3/s3.service';
 export class AppService {
   @Inject(S3Service)
   private storage: S3Service;
+
   getHello(): string {
     return 'Hello World!';
   }
